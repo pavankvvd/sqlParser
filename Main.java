@@ -18,21 +18,25 @@ public class Main {
    public enum State {
         CREATE, 
         TABLE, 
-        NAME,  
+        NAME,
+        KEYWORD,  
         ATTRIBUTE_TYPE,
         ENDED
    }
-
-    public enum Event{
+    
+  public static enum State currentState;
+  public static enum Event currentEvent; 
+ 
+  public enum Event{
         SPACE(' '),
         COMMA(','),
         OPEN_BRACE('('),
         CLOSEBRACE(')'),
         END(';')
-    }
+  }
         
 
-    public static void main(String[] args) {
+  public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String inputStr = null;
         String[] query;
@@ -50,20 +54,27 @@ public class Main {
                                    break;
                     case  "TABLE": currentState = State.TABLE:
                                    break;
-                    default : if(input.length>0 and dataTypes.contains(input))
+                    default : if(input.length > 0 && dataTypes.contains(input))
                                     currentState = State.ATTRIBUTE_TYPE;
-                              else  currentState = State.NAME;  
-                              break;
+                              else if(input.length>0 && keywords.contains(input)) 
+                                        currentState = State.KEYWORD;  
+                              else currentState = State.NAME;
+                            break;
             }
             
             switch(inputStr[i]){
-                case ' ': setCurrentState(State.ATTRIBUTE_NAME, State.TABLE, State.TABLE_NAME, State.);
+                case Event.SPACE: currentEvent = Event.SPACE; 
+                          setCurrentState(State.ATTRIBUTE_NAME, State.TABLE, State.TABLE_NAME, State.);
                           break;
-                case ',': setCurrentState(State.ATTRIBUTE_NAME); 
+                            
+                case Event.COMMA: currentEvent = Event.COMMA; 
+                          setCurrentState(State.ATTRIBUTE_NAME); 
                           break;
-                case '(': setCurrentState(State.ATTRIBUTE_NAME);
+                case Event.OPEN_BRACE: currentEvent = Event.OPEN_BRACE;
+                          setCurrentState(State.ATTRIBUTE_NAME);
                           break;
-                case ')': setCurrentState(State.ENDED);
+                case Event.CLOSE_BRACE: currentEvent = Event.CLOSE_BRACE; 
+                          setCurrentState(State.ENDED);
                           break;
                 default : System.out.println("Syntax Error at ith positiion");
                           break;
@@ -73,9 +84,6 @@ public class Main {
 
 
     private static void select_check(String[] query) {
-        switch(state):
-            case TABLE:
-            break;
 
     }
 
