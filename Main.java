@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class Main {
 
+   //TODO update keywords
     static final List<String> keywords = Arrays.asList(new String[]{"CREATE",
         "TABLE", "INSERT", "SELECT", "INTO", "FROM", "WHERE", "*", "(", ")",
                  "MDSYS.SPATIAL_INDEX", "INDEXTYPE", "PRIMARY KEY",
@@ -35,7 +36,6 @@ public class Main {
         END(';')
   }
         
-
   public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String inputStr = null;
@@ -64,7 +64,7 @@ public class Main {
             
             switch(inputStr[i]){
                 case Event.SPACE: currentEvent = Event.SPACE; 
-                          setCurrentState(State.ATTRIBUTE_NAME, State.TABLE, State.TABLE_NAME, State.);
+                         // TODO set current state based on previous state 
                           break;
                             
                 case Event.COMMA: currentEvent = Event.COMMA; 
@@ -81,7 +81,8 @@ public class Main {
             }   
         }
     }
-
+    
+    
 
     private static void select_check(String[] query) {
 
